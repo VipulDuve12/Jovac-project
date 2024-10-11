@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #444;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            width: 380px;
+            text-align: center;
+            animation: popUp 0.5s ease-in-out;
+        }
+
+        @keyframes popUp {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #f1f1f1;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 150, 136, 0.2);
+            outline: none;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #66a6ff 0%, #89f7fe 100%);
+            color: white;
+            padding: 14px;
+            width: 100%;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            box-shadow: 0 8px 20px rgba(102, 166, 255, 0.4);
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f1f1f1;
+            border-radius: 10px;
+            display: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Performance Predictor</h2>
+
+        <div class="form-group">
+            <label for="hours-studied">Hours Studied</label>
+            <input type="number" id="hours-studied" placeholder="Enter hours studied">
+        </div>
+
+        <div class="form-group">
+            <label for="previous-scores">Previous Scores</label>
+            <input type="number" id="previous-scores" placeholder="Enter previous scores">
+        </div>
+
+        <div class="form-group">
+            <label for="extracurricular">Extracurricular Activities</label>
+            <input type="number" id="extracurricular" placeholder="Enter hours of activities">
+        </div>
+
+        <div class="form-group">
+            <label for="sleep-hours">Sleep Hours</label>
+            <input type="number" id="sleep-hours" placeholder="Enter sleep hours">
+        </div>
+
+        <div class="form-group">
+            <label for="sample-papers">Sample Question Papers Practiced</label>
+            <input type="number" id="sample-papers" placeholder="Enter number of papers practiced">
+        </div>
+
+        <button class="btn" onclick="predictPerformance()">Predict Performance Index</button>
+
+        <div class="output" id="output">
+            Your Predicted Performance Index: <span id="performance-result">85</span>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Performance Predictor</p>
+        </div>
+    </div>
+
+    <script>
+        function predictPerformance() {
+            // Collect input values
+            let hoursStudied = document.getElementById('hours-studied').value;
+            let previousScores = document.getElementById('previous-scores').value;
+            let extracurricular = document.getElementById('extracurricular').value;
+            let sleepHours = document.getElementById('sleep-hours').value;
+            let samplePapers = document.getElementById('sample-papers').value;
+
+            // Simple formula to simulate prediction (replace with actual ML model prediction)
+            let predictedValue = (hoursStudied * 2.85280581) + (previousScores * 1.01903459) +
+                                 (extracurricular * -0.59423491) + (sleepHours * 0.4806179) +
+                                 (samplePapers * 0.19635592) + -33.53770789254257;
+
+            // Ensure the prediction is within a reasonable range
+            predictedValue = Math.min(Math.max(predictedValue, 0), 100);
+
+            // Display the predicted value
+            document.getElementById('performance-result').innerText = predictedValue.toFixed(2);
+            document.getElementById('output').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
